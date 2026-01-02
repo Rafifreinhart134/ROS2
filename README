@@ -1,5 +1,10 @@
 __init__.py: Wajib ada di setiap folder script agar bisa di-import.
-
 setup.py: Adalah daftar menu. Jika kamu menambah masakan (file .py) baru, kamu harus mencatatnya di daftar menu ini agar pelayan (ros2 run) tahu apa yang harus dipesan.
-
 colcon build: Adalah proses memasak. Setiap kali ada perubahan di "daftar menu" atau "resep", kita harus masak ulang.
+
+Setelah ubah code/tambah file code baru :
+1. colcon build --packages-select belajar_kontrol : "belajar_kontrol" nama foldernya
+2. source install/setup.bash
+3. ros2 run belajar_kontrol kotak_presisi : run foldernya "belajar_kontrol" dan file codenya "kotak_presisi"
+
+ros2 pkg executables turtlesim : cek command turtlesim yang bisa dijalanin apa aja, nanti ada turtlesim_node untuk nampilin si turtle

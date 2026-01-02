@@ -8,4 +8,5 @@ Setelah ubah code/tambah file code baru :
 3. ros2 run belajar_kontrol kotak_presisi : run foldernya "belajar_kontrol" dan file codenya "kotak_presisi"
 
 ros2 pkg executables turtlesim : cek command turtlesim yang bisa dijalanin apa aja, nanti ada turtlesim_node untuk nampilin si turtle
-ros2 run turtlesim [Tekan Tombol Tab 2 Kali] : Tab 2 kali maka sistem akan otomatis menampilkan semua pilihan program yang tersedia di dalam paket tersebut (kalau malas ngetik command executables di atas).
+ros2 run turtlesim [Tekan Tombol Tab 2 Kali] : Tab 2 kali maka sistem akan otomatis menampilkan semua pilihan program yang tersedia di dalam paket tersebut (kalau malas ngetik command executables di atas). rafifdewa
+

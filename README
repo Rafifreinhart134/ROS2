@@ -19,3 +19,24 @@ Analogi: Seperti mengambil selembar kertas kosong dari laci. Kamu sudah punya ke
 Fungsi: Memberikan izin eXecutable (pelaksanaan) pada file tersebut. chmod adalah singkatan dari Change Mode.
 Analogi: Seperti memberi stempel "RESMI" pada kertas tadi agar sistem operasi tahu bahwa file ini bukan cuma teks biasa, tapi sebuah program yang boleh dijalankan.
 Kenapa harus dilakukan? Secara default, Linux membuat file baru dengan status "Read & Write" saja. Tanpa +x, kamu tidak bisa menjalankan ros2 run karena sistem menganggap file itu tidak aman untuk dieksekusi.
+
+**Command untuk Keluar dari Folder**
+Dalam terminal Linux, kita menggunakan perintah cd (Change Directory). Berikut adalah variasi untuk "keluar" atau berpindah:
+
+1. Keluar satu tingkat ke atas:
+cd ..
+(Gunakan dua titik setelah cd. Ini akan membawamu dari belajar_kontrol/belajar_kontrol kembali ke src/belajar_kontrol).
+
+2. Keluar dua tingkat ke atas:
+cd ../..
+
+3. Langsung pulang ke Home folder (~):
+cd
+(Cukup ketik cd tanpa tambahan apa pun).
+
+4. Kembali ke folder sebelumnya (Back):
+cd -
+
+5. Untuk memastikan kamu ada di mana sekarang, kamu bisa mengetik:
+pwd
+(Singkatan dari Print Working Directory. Ini akan memunculkan alamat lengkap folder kamu saat ini).

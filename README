@@ -10,3 +10,12 @@ Setelah ubah code/tambah file code baru :
 ros2 pkg executables turtlesim : cek command turtlesim yang bisa dijalanin apa aja, nanti ada turtlesim_node untuk nampilin si turtle
 ros2 run turtlesim [Tekan Tombol Tab 2 Kali] : Tab 2 kali maka sistem akan otomatis menampilkan semua pilihan program yang tersedia di dalam paket tersebut (kalau malas ngetik command executables di atas). rafifdewa
 
+Kedua perintah ini menangani aspek yang berbeda dari sebuah file: Keberadaan dan Izin.
+1. touch [nama_file]:
+Fungsi: Membuat file baru yang kosong.
+Analogi: Seperti mengambil selembar kertas kosong dari laci. Kamu sudah punya kertasnya, tapi belum tentu kamu boleh "menggunakannya" sebagai script.
+
+2. chmod +x [nama_file]:
+Fungsi: Memberikan izin eXecutable (pelaksanaan) pada file tersebut. chmod adalah singkatan dari Change Mode.
+Analogi: Seperti memberi stempel "RESMI" pada kertas tadi agar sistem operasi tahu bahwa file ini bukan cuma teks biasa, tapi sebuah program yang boleh dijalankan.
+Kenapa harus dilakukan? Secara default, Linux membuat file baru dengan status "Read & Write" saja. Tanpa +x, kamu tidak bisa menjalankan ros2 run karena sistem menganggap file itu tidak aman untuk dieksekusi.

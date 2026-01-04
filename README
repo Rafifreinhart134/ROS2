@@ -48,3 +48,8 @@ cd -
 5. Untuk memastikan kamu ada di mana sekarang, kamu bisa mengetik:
 pwd
 (Singkatan dari Print Working Directory. Ini akan memunculkan alamat lengkap folder kamu saat ini).
+
+Dalam ros_gz_bridge:
+1. @ : Menandakan bridge dua arah (bidirectional).
+2. [ : Menandakan bridge satu arah dari Gazebo ke ROS.
+3. ] : Menandakan bridge satu arah dari ROS ke Gazebo.

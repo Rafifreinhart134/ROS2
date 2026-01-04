@@ -11,6 +11,10 @@ Setelah ubah code/tambah file code baru :
 Setiap membuka terminal baru, terminal tersebut masih "polos" dan belum tahu di mana letak instalasi paket buatanmu:
 1. source ~/ros2_ws/install/setup.bash : agar bisa detect dan jalanin program
 
+Untuk import model robot di gazebo simulator:
+1. export TURTLEBOT3_MODEL=burger
+2. ros2 launch belajar_kontrol simulasi_lengkap.launch.py
+
 ros2 pkg executables turtlesim : cek command turtlesim yang bisa dijalanin apa aja, nanti ada turtlesim_node untuk nampilin si turtle
 ros2 run turtlesim [Tekan Tombol Tab 2 Kali] : Tab 2 kali maka sistem akan otomatis menampilkan semua pilihan program yang tersedia di dalam paket tersebut (kalau malas ngetik command executables di atas). rafifdewa
 

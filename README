@@ -53,3 +53,10 @@ Dalam ros_gz_bridge:
 1. @ : Menandakan bridge dua arah (bidirectional).
 2. [ : Menandakan bridge satu arah dari Gazebo ke ROS.
 3. ] : Menandakan bridge satu arah dari ROS ke Gazebo.
+
+- Visualisasi Sudut LiDAR
+0°: Tepat di depan robot.
+90°: Tepat di samping kiri robot.
+180°: Tepat di belakang robot.
+270°: Tepat di samping kanan robot.
+359°: Tepat di depan robot (kembali ke titik awal).

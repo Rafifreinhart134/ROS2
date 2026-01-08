@@ -60,3 +60,21 @@ Dalam ros_gz_bridge:
 180°: Tepat di belakang robot.
 270°: Tepat di samping kanan robot.
 359°: Tepat di depan robot (kembali ke titik awal).
+
+Kenapa Robot Butuh Keduanya? (Studi Kasus Industri)Mengapa kita tidak pakai Raspberry Pi saja untuk semuanya? Kenapa harus ada ESP32?
+1. Real-Time Latency: Linux (Raspberry Pi) adalah sistem operasi "cerdas" tapi sering "sibuk sendiri". Jika Linux sedang update atau proses background, sinyal ke motor bisa terlambat sepersekian detik. Di industri, keterlambatan ini bisa bikin robot menabrak. ESP32 fokus hanya pada satu tugas (misal: PWM motor), sehingga sangat stabil.
+2. Efisiensi Power & Pin: ESP32 punya banyak pin Analog-to-Digital (ADC) yang bagus untuk sensor, sedangkan Raspberry Pi sangat terbatas.
+3. Tingkat Kesulitan Tugas:
+- Raspberry Pi: "Saya melihat kotak di koordinat $x, y$. Kita harus belok 30 derajat." (Tugas Logika/Strategi).
+- ESP32/micro-ROS: "Siap! Saya akan putar motor kiri 500 RPM dan motor kanan 200 RPM agar kita belok 30 derajat." (Tugas Eksekusi).
+
+
+
+
+
+
+
+
+
+
+

@@ -68,7 +68,9 @@ Kenapa Robot Butuh Keduanya? (Studi Kasus Industri)Mengapa kita tidak pakai Rasp
 - Raspberry Pi: "Saya melihat kotak di koordinat $x, y$. Kita harus belok 30 derajat." (Tugas Logika/Strategi).
 - ESP32/micro-ROS: "Siap! Saya akan putar motor kiri 500 RPM dan motor kanan 200 RPM agar kita belok 30 derajat." (Tugas Eksekusi).
 
-
+Solusi Agar PCB Tidak Short Lagi:
+1. Perlebar Clearance: Jangan biarkan garis batas itu terlalu tipis. Untuk jalur power, berikan jarak minimal 0.3 mm sampai 0.5 mm antara jalur tembaga dan area Ground biru di sekitarnya.
+2. Copper Pour Isolation: Saat kamu membuat "GND Plane" (warna biru yang memenuhi papan), pastikan nilai Isolasi (Isolation) ditingkatkan. Ini akan membuat "parit" yang lebih lebar di sekitar jalur positif.
 
 
 

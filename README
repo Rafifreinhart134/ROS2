@@ -1,3 +1,9 @@
+Cara buka ROS2:
+1. wsl -d Ubuntu-22.04 (masuk kedalam ROS2), 
+wsl -l -v (cek list ubuntu yg terinstall)
+
+
+
 __init__.py: Wajib ada di setiap folder script agar bisa di-import.
 setup.py: Adalah daftar menu. Jika kamu menambah masakan (file .py) baru, kamu harus mencatatnya di daftar menu ini agar pelayan (ros2 run) tahu apa yang harus dipesan.
 colcon build: Adalah proses memasak. Setiap kali ada perubahan di "daftar menu" atau "resep", kita harus masak ulang.

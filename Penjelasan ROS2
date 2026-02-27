@@ -49,6 +49,11 @@ Node LED: Mendengarkan topik /led_control dan menyalakan lampu fisik.
 Kenapa repot begitu? Agar jika Anda ingin mengganti sensor, Anda cukup mengganti satu node sensor saja tanpa menyentuh kode logika atau kode LED. Ini membuat sistem robot sangat fleksibel dan mudah diperbaiki.
 
 
+
+kenapa di service dan subscription itu ada self.callback sedangkan publisher dan client tidak ada ?
+self.create_subscription(String, 'robot_status', self.callback, 10)
+self.create_publisher(String, 'robot_status', 10)
+
 Perbedaan mendasar antara model komunikasi asinkron (menunggu) dan proaktif (memerintah) di ROS2.
 
 Alasan utamanya adalah Subscriber dan Service Server bersifat "pasif" atau reaktif, sedangkan Publisher dan Client bersifat "aktif" atau proaktif.

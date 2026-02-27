@@ -47,3 +47,33 @@ Node Logika: Mendengarkan (Subscribe) topik /sensor_data. Jika datanya HIGH, dia
 Node LED: Mendengarkan topik /led_control dan menyalakan lampu fisik.
 
 Kenapa repot begitu? Agar jika Anda ingin mengganti sensor, Anda cukup mengganti satu node sensor saja tanpa menyentuh kode logika atau kode LED. Ini membuat sistem robot sangat fleksibel dan mudah diperbaiki.
+
+
+Perbedaan mendasar antara model komunikasi asinkron (menunggu) dan proaktif (memerintah) di ROS2.
+
+Alasan utamanya adalah Subscriber dan Service Server bersifat "pasif" atau reaktif, sedangkan Publisher dan Client bersifat "aktif" atau proaktif.
+
+Berikut penjelasan detailnya:
+1. Kenapa Subscriber & Service Server butuh self.callback?
+Kedua komponen ini tidak tahu kapan data atau permintaan akan datang. Mereka harus selalu siaga.
+
+Subscriber: Dia hanya diam sampai ada data yang lewat di Topic. Begitu data datang, sistem ROS2 bertanya: "Apa yang harus saya lakukan dengan data ini?". Di sinilah callback (fungsi panggilan balik) berperan sebagai instruksi otomatis.
+Service Server: Dia standby menunggu Client memanggil. Begitu ada "ketukan pintu" (request), dia menjalankan callback untuk memproses permintaan tersebut dan memberikan jawaban.
+Logikanya: Callback seperti memasang alarm. Anda tidak tahu kapan alarm bunyi, tapi Anda sudah menentukan: "Jika bunyi, lakukan fungsi ini".
+
+2. Kenapa Publisher & Client tidak punya self.callback yang sama?
+Komponen ini adalah pihak yang memulai aksi, sehingga mereka memegang kendali penuh atas kapan kode dijalankan.
+
+Publisher: Dialah yang memutuskan kapan mengirim data. Biasanya kita menggunakan Timer. Timer-lah yang memiliki callback untuk memicu fungsi publish(), bukan Publisher-nya sendiri.
+Service Client: Dia yang mengirim permintaan (request). Dia tidak butuh callback untuk menerima permintaan karena dialah pembuatnya. Namun, perlu dicatat bahwa Client biasanya menggunakan fitur future atau async_call untuk menunggu jawaban agar program tidak membeku (freeze) saat menunggu server.
+
+Perbandingan Sederhana:
+Subscriber & Server: Seperti Pelayan Restoran. Dia tidak tahu kapan tamu datang. Dia butuh "instruksi tetap" (callback): "Jika tamu datang, berikan menu".
+Publisher & Client: Seperti Tamu. Dia yang memutuskan kapan mau memesan. Dia tidak menunggu instruksi untuk memesan, dia langsung melakukan aksi call atau send.
+
+Di mana baris penghubungnya?
+Meskipun Publisher tidak punya callback internal, di dalam kode Anda:
+Publisher: Digerakkan oleh self.create_timer(1.0, self.timer_callback). Timer inilah yang memanggil fungsi pengirim pesan secara rutin.
+Subscriber: Terhubung langsung saat pembuatan: self.create_subscription(..., self.listener_callback, ...). Di sini self.listener_callback adalah perintah otomatis setiap ada pesan masuk.
+
+Jadi, callback adalah cara ROS2 menangani kejadian yang tidak terduga waktunya (event-driven) agar CPU Anda tidak bekerja keras melakukan pengecekan if-else terus-menerus secara manual seperti pada beberapa pola pemrograman mikrokontroler tradisional.

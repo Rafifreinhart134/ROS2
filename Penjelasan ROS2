@@ -1,11 +1,7 @@
 1. Mengapa harus ada Launch File (.launch.py)?
 Launch file adalah "manajer proyek" Anda. Jika di ESP32 Anda hanya punya satu void loop(), di robot besar Anda mungkin punya 50 node (sensor laser, kamera, penggerak roda, dll).
-+1
-
 
 Fungsinya: Menjalankan banyak node sekaligus hanya dengan satu perintah terminal. Tanpa file ini, Anda harus membuka 50 terminal dan mengetik ros2 run... satu per satu.
-+1
-
 
 Kenapa namanya generate_launch_description? Ini adalah fungsi standar yang dicari oleh sistem ROS2 saat Anda menjalankan perintah ros2 launch. Fungsi ini tidak dipanggil oleh node lain, melainkan oleh sistem operasi ROS2 untuk mengetahui daftar node apa saja yang harus dinyalakan.
 
@@ -18,36 +14,26 @@ console_scripts: ROS2 tidak menjalankan file .py secara langsung seperti python3
 
 data_files (bagian launch): Secara default, saat Anda melakukan colcon build, ROS2 hanya menyalin kode Python. File .launch.py berada di folder luar. Baris os.path.join(...) memerintahkan ROS2 untuk menyalin file launch tersebut ke folder sistem (install/) agar bisa ditemukan saat dipanggil.
 
+
 3. Bagaimana Node Saling Terhubung? (Baris Kode Kuncinya)
 Berbeda dengan ESP32 yang menggunakan if-else dalam satu file, ROS2 menggunakan DDS (Data Distribution Service) sebagai perantara. Mereka terhubung karena memiliki Nama Topik atau Nama Service yang sama.
-+2
 
 Berikut baris kode yang menghubungkan mereka:
-
 A. Komunikasi Topic (Publisher & Subscriber)
 Di status_publisher.py:
-
-
 self.create_publisher(String, 'robot_status', 10).
 Kuncinya: Nama topik 'robot_status'. Node ini mengumumkan: "Saya akan mengirim data String ke saluran bernama 'robot_status'".
 
 Di status_listener.py:
-
-
 self.create_subscription(String, 'robot_status', self.callback, 10).
 Kuncinya: Nama topik harus sama persis: 'robot_status'. Node ini berkata: "Saya mau mendengarkan saluran bernama 'robot_status'".
 
 B. Komunikasi Service (Server & Client)
 Di service_server.py:
-
-
 self.create_service(SetBool, 'get_status', self.callback).
 Kuncinya: Nama service 'get_status'. Server stand-by di jalur ini.
-+1
 
 Di service_client.py:
-
-
 self.create_client(SetBool, 'get_status').
 Kuncinya: Client memanggil jalur yang sama yaitu 'get_status'.
 
@@ -56,12 +42,8 @@ Jika di ESP32 Anda menulis:
 if (sensor_read == HIGH) { digitalWrite(LED, HIGH); }
 
 Di ROS2 Anda membaginya:
-
-
 Node Sensor: Membaca sensor lalu mengirim (Publish) ke topik /sensor_data.
-
 Node Logika: Mendengarkan (Subscribe) topik /sensor_data. Jika datanya HIGH, dia mengirim perintah (Publish atau Call Service) ke topik/service /led_control.
-
 Node LED: Mendengarkan topik /led_control dan menyalakan lampu fisik.
 
 Kenapa repot begitu? Agar jika Anda ingin mengganti sensor, Anda cukup mengganti satu node sensor saja tanpa menyentuh kode logika atau kode LED. Ini membuat sistem robot sangat fleksibel dan mudah diperbaiki.
